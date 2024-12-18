@@ -1,16 +1,7 @@
-import threading
+from pyscript import window
 
 from prune import Prune, notify
 
-
-def set_interval(func, sec):
-    def func_wrapper():
-        set_interval(func, sec)
-        func()
-
-    t = threading.Timer(sec, func_wrapper)
-    t.start()
-    return t
 
 class Clock:
     def __init__(self) -> None:
@@ -18,7 +9,7 @@ class Clock:
         self.minutes_deg = 0
         self.hours_deg = 0
         # Si on veut on peut passer des arguments derrière le temps, ce sera envoyé à event
-        # set_interval(self.refresh_clock, 1000)
+        window.setInterval(self.refresh_clock, 1000)
 
     @notify
     def refresh_clock(self):
